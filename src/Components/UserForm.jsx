@@ -64,7 +64,7 @@ const UserForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>{id ? 'Edit User' : 'User Registration Form'}</h2>
+      <h2>{id ? 'Edit your account' : 'Create account'}</h2>
 
       <input name="firstName" placeholder="First Name" value={user.firstName} onChange={handleChange} />
       {errors.firstName && <span className="error">{errors.firstName}</span>}
@@ -83,7 +83,7 @@ const UserForm = () => {
       <input name="email" placeholder="Email" value={user.email} onChange={handleChange} />
       {errors.email && <span className="error">{errors.email}</span>}
 
-      <button type="submit">{id ? 'Update' : 'Add'}</button>
+      <button type="submit">{id ? 'Update' : 'Sign up'}</button>
     </form>
   );
 };

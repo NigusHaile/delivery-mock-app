@@ -8,10 +8,10 @@ import UserDetails from './Components/UserDetails';
 function App() {
   return (
     <Router>
-      <nav>
-        <Link to="/">Home</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Link to="/create" className="add-user-btn">Add User</Link>
-      </nav>
+     <nav className="navbar">
+       <Link to="/">Home</Link>
+       <Link to="/create" className="add-user-btn">Add User</Link>
+     </nav>
       <Routes>
         <Route path="/" element={<UserList />} />
         <Route path="/create" element={<UserForm />} />
