@@ -17,27 +17,24 @@ const UserList = () => {
     }
   };
 
-  return (
-    <div className="user-management-container">
-      <br/>
-      <h2> <center> Users List </center></h2>
-
-      <ol className="user-list">
-        {users.map((user, index) => (
-          <li key={user.id} className="user-list-item">
-            <div className="user-info">
-              <span className="user-name">{user.userName}</span>
-              <span className="user-email">- {user.email}</span>
-            </div>
-            <div className="user-actions">
-              <Link to={`/edit/${user.id}`} className="action-btn edit-btn">Edit</Link>
-              <button onClick={() => handleDelete(user.id)} className="action-btn delete-btn">Delete</button>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
+ return (
+     <div className="user-list-container">
+       <center> <h2>Users</h2></center>
+       <ol className="user-list">
+         {users.map(user => (
+           <li key={user.id} className="user-item">
+             <span className="user-name">{user.userName}</span>
+             <span className="user-email">{user.email}</span>
+             <span className="user-phone">{user.phoneNumber}</span>
+             <span className="user-actions">
+               <Link to={`/edit/${user.id}`} className="btn edit-btn">Edit</Link>
+               <button onClick={() => handleDelete(user.id)} className="btn delete-btn">Delete</button>
+             </span>
+           </li>
+         ))}
+       </ol>
+     </div>
+   );
 };
 
 export default UserList;
