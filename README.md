@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# Delivery Mock App — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React 19 single-page application for managing users in a delivery system.
+Provides full CRUD functionality (Create, Read, Update, Delete) for user records,
+with client-side validation and integration with a backend REST API.
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+- **List users** — paginated view of all registered users
+- **View user details** — drill into individual user records
+- **Create new users** — form with field-level validation
+- **Edit existing users** — pre-populated form, same validation rules
+- **Delete users** — with confirmation prompt
+- **Client-side validation** — username length, required names, email format, international phone number format
+- **Client-side routing** — React Router for SPA navigation
 
-### `npm start`
+## 🛠️ Tech stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React 19** with functional components and hooks
+- **React Router v7** for client-side routing
+- **Axios** for HTTP requests
+- **Create React App** as the build/dev tool
+- **React Testing Library** + Jest DOM for tests
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📋 User data model
 
-### `npm test`
+Each user has the following fields:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Field         | Validation                                    |
+|---------------|-----------------------------------------------|
+| `userName`    | 3–20 characters                               |
+| `firstName`   | required                                      |
+| `middleName`  | optional                                      |
+| `lastName`    | required                                      |
+| `phoneNumber` | international format (`+`, digits, separators)|
+| `email`       | valid email format                            |
 
-### `npm run build`
+## 🔌 Backend API
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The app expects a REST backend at `http://localhost:8082/api/users` exposing:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Method  | Endpoint        | Purpose            |
+|---------|-----------------|--------------------|
+| `GET`   | `/api/users`    | List all users     |
+| `GET`   | `/api/users/:id`| Get user by ID     |
+| `POST`  | `/api/users`    | Create a new user  |
+| `PUT`   | `/api/users/:id`| Update a user      |
+| `DELETE`| `/api/users/:id`| Delete a user      |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting started
 
-### `npm run eject`
+### Prerequisites
+- Node.js (v18+ recommended)
+- A running backend at `http://localhost:8082` (or update the API URL in `UserService.js`)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Installation
+git clone https://github.com/<your-username>/delivery-mock-app.git
+cd delivery-mock-app
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Run in development
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Opens [http://localhost:3000](http://localhost:3000) with hot reload.
 
-## Learn More
+### Build for production
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+npm run build
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Outputs to the `build/` folder.
 
-### Code Splitting
+### Run tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+npm test
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📁 Project structure
 
-### Making a Progressive Web App
+src/
+├── App.js                      # Main app + router setup
+├── App.css                     # Global styles
+├── index.js                    # React entry point
+├── Components/
+│   ├── UserList.jsx            # List view with delete action
+│   ├── UserForm.jsx            # Create + edit form with validation
+│   ├── UserDetails.jsx         # Individual user detail view
+│   └── UserList.css            # List styles
+└── Services/
+└── UserService.js          # Axios client + API methods
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🗺️ Routes
 
-### Advanced Configuration
+| Path           | Component       | Purpose             |
+|----------------|-----------------|---------------------|
+| `/`            | `UserList`      | All users           |
+| `/create`      | `UserForm`      | New user form       |
+| `/edit/:id`    | `UserForm`      | Edit existing user  |
+| `/user/:id`    | `UserDetails`   | View one user       |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Configuration
 
-### Deployment
+To point at a different backend, edit `src/Services/UserService.js`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+const API_URL = 'http://your-backend.example.com/api/users';
 
-### `npm run build` fails to minify
+For production, consider moving this into an environment variable (`REACT_APP_API_URL`).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Possible improvements
+
+- Move the API URL into `.env` (e.g. `REACT_APP_API_URL`)
+- Add loading states and error toasts
+- Replace `window.confirm` with a custom modal
+- Add pagination or search/filter for large user lists
+- Add proper auth (login, JWT, protected routes)
+- Replace inline `&nbsp;` spacing in navbar with CSS
+
+## 📄 License
+
+Add preferred license here (MIT, Apache 2.0, etc.).
