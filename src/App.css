@@ -38,7 +38,6 @@ body {
   background-color: #2980b9;
 }
 
-
 nav {
   background-color: #2c3e50;
   padding: 1rem 2rem;
@@ -110,17 +109,14 @@ form select {
   font-size: 1rem;
 }
 
-
 .user-name {
   font-weight: bold;
   color: #2c3e50;
 }
-
 .user-email {
   color: #666;
   font-size: 0.95rem;
 }
-
 .user-actions {
   display: flex;
   gap: 0.5rem;
@@ -135,7 +131,6 @@ form select {
   max-width: 600px;
   margin: 2rem auto;
 }
-
 .user-details-page h2 {
   color: #2c3e50;
   border-bottom: 2px solid #eee;
@@ -164,7 +159,6 @@ form select {
     gap: 0.5rem;
     padding: 0.75rem;
   }
-
   .user-actions {
     justify-content: flex-start;
     width: 100%;
